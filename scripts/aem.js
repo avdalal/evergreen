@@ -674,11 +674,6 @@ async function loadHeader(header) {
   const headerBlock = buildBlock("header", "");
   header.append(headerBlock);
   decorateBlock(headerBlock);
-  // Add the script dynamically
-  const script = document.createElement("script");
-  script.src = "https://universal-editor-service.adobe.io/cors.js";
-  script.async = true;
-  document.head.appendChild(script);
   return loadBlock(headerBlock);
 }
 
