@@ -110,9 +110,9 @@ export default async function decorate(block) {
     summaryDiv.innerHTML = `
       <h3>Summary</h3>
       <p>Total Items: <span id="total-items">${totalItems}</span></p>
-      <p>Total Price: $<span id="total-price">${Math.round(totalPrice)}</span></p>
-      <p>Shipping Fee: $<span id="shipping-fee">${totalItems > 0 ? Math.round(shippingFee) : '0'}</span></p>
-      <p>Total Price (including shipping): $<span id="total-price-with-shipping">${totalItems > 0 ? Math.round(totalPrice + shippingFee) : '0'}</span></p>
+      <p>Total Price: <span id="total-price">${Math.round(totalPrice)}</span></p>
+      <p>Shipping Fee: <span id="shipping-fee">$${totalItems > 0 ? Math.round(shippingFee) : '0'}</span></p>
+      <p>Total Price (including shipping): <span id="total-price-with-shipping">${totalItems > 0 ? Math.round(totalPrice + shippingFee) : '0'}</span></p>
       <button class="cta-button">Complete Payment</button>
     `;
     block.append(summaryDiv);
