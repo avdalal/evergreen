@@ -5,17 +5,24 @@ export default async function decorate(block) {
     const response = await fetch("/products.json");
     const data = await response.json();
 
-    // Extract category from the URL
+    // Extract category and subcategory from the URL
     const url = new URL(window.location.href);
     const category = url.pathname.split("/").pop();
+    const subcategory = url.searchParams.get("subcategory");
 
     const ul = document.createElement("ul");
     ul.className = "products__list";
 
-    // Filter products by category
-    const filteredProducts = data.data.filter(
-      (product) => product.Category.toLowerCase() === category.toLowerCase()
-    );
+    // Filter products by category and subcategory
+    const filteredProducts = data.data.filter((product) => {
+      const isCategoryMatch =
+        product.Category.toLowerCase() === category.toLowerCase();
+      const isSubcategoryMatch = subcategory
+        ? product.SubCategory &&
+          product.SubCategory.toLowerCase() === subcategory.toLowerCase()
+        : true;
+      return isCategoryMatch && isSubcategoryMatch;
+    });
 
     filteredProducts.forEach((product) => {
       const li = document.createElement("li");
