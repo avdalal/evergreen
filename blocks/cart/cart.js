@@ -1,7 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-  localStorage.setItem('cart', JSON.stringify([{productID: 1, amount: 1}, {productID: 2, amount: 2}])); // for testing
+
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   console.log('cart', cart);
 
@@ -11,7 +11,7 @@ export default async function decorate(block) {
 
     const cartProducts = [];
     data.data.forEach((product) => {
-      if (!cart.some((item) => item.productID === product.ProductID)) {
+      if (cart.some((item) => item.productID === product.ProductID)) {
         cartProducts.push(product);
       }
     });
