@@ -1,0 +1,10 @@
+.productinfo .image {
+  width: 30%;
+  padding-right: 30px;
+}
+.productinfo {
+  display: flex;
+}
+.productinfo button{
+  background-color: #ff7f00;
+}
