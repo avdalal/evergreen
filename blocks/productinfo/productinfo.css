@@ -1,6 +1,7 @@
 .productinfo .image {
   width: 30%;
   padding-right: 30px;
+  align-content: center;
 }
 .productinfo {
   display: flex;
