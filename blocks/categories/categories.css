@@ -5,6 +5,8 @@
 
 .categories{
   width: 100%;
+  justify-content: center;
+  display: flex;
 }
 
 .categories > ul {
@@ -36,5 +38,10 @@
 
 
 @media (max-width: 900px) {
-
+  .categories > ul {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5px; /* Adjust the gap between grid items as needed */
+    justify-content: center;
+  }
 }
