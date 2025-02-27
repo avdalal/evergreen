@@ -39,5 +39,8 @@
 
 .products__product-image {
   max-width: 320px;
+  height: 375px;
   padding-bottom: .375rem;
+  display: flex;
+  align-items: center;
 }
