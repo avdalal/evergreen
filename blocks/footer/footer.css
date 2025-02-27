@@ -3,18 +3,67 @@ footer {
   font-size: var(--body-font-size-xs);
 }
 
+.footer-wrapper{
+  background-color: #000000;
+}
+
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
   padding: 40px 24px 24px;
 }
-
+.footer .section a, .footer .section{
+  color: #e1e1e1  ;
+}
 footer .footer p {
   margin: 0;
+}
+
+footer .footer-class {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (width >= 900px) {
   footer .footer > div {
     padding: 40px 32px 24px;
+  }
+}
+
+footer .footer-class h4::before {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 16px;
+  background-color: #ff7f00;
+  margin-right: 8px;
+}
+
+footer .footer-class{
+  min-height: 35vh;
+}
+
+@media (max-width: 899px) {
+  footer .footer-class .section .default-content-wrapper > *:not(h4) {
+    display: none;
+  }
+
+  footer .footer-class .section h4::after {
+    content: '+';
+    margin-left: 8px;
+    cursor: pointer;
+
+    float: right;
+  }
+
+  footer .footer-class .section.open .default-content-wrapper > *:not(h4) {
+    display: block;
+  }
+
+  footer .footer-class .section.open h4::after {
+    content: '-';
+  }
+  footer .footer-class{
+    display: block;
   }
 }
