@@ -14,7 +14,17 @@ export default async function decorate(block) {
   // decorate footer DOM
   block.textContent = '';
   const footer = document.createElement('div');
+  footer.className = 'footer-class';
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
-
+  footer.querySelectorAll('a.button').forEach((a) => {
+    a.classList.remove('button');
+  });
+    // Add click event listeners for toggling sections on small screens
+    footer.querySelectorAll('.section h4').forEach((h4) => {
+      h4.addEventListener('click', () => {
+        const section = h4.closest('.section');
+        section.classList.toggle('open');
+      });
+    });
   block.append(footer);
 }
