@@ -1,12 +1,15 @@
 .cards-wrapper{
   display: flex;
   justify-content: center;
+
 }
 
 .cards{
   display: flex;
   width: 90%;
   justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .cards > ul {
