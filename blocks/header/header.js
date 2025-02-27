@@ -239,8 +239,7 @@ function searchInput(block, config) {
   input.setAttribute("type", "search");
   input.className = "search-input";
 
-  const searchPlaceholder =
-    config.placeholders.searchPlaceholder || "Search...";
+  const searchPlaceholder = config.placeholders.searchPlaceholder || "Search";
   input.placeholder = searchPlaceholder;
   input.setAttribute("aria-label", searchPlaceholder);
 
@@ -250,6 +249,7 @@ function searchInput(block, config) {
 
   input.addEventListener("keyup", (e) => {
     if (e.code === "Escape") {
+      // e.style.display = "none";
       clearSearch(block);
     }
   });
@@ -436,7 +436,7 @@ function toggleNavDrop(navSection, navSections) {
   } else {
     dropdown.style.display = "block";
     setTimeout(() => {
-      dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+      dropdown.style.maxHeight = "unset";
       dropdown.style.opacity = "1";
     }, 10);
   }
@@ -456,6 +456,39 @@ function toggleSideMenu() {
 function closeSideMenu() {
   const sideMenu = document.querySelector(".side-menu");
   sideMenu.classList.remove("open");
+}
+
+function toggleSideMenuDropdown(e) {
+  const clickedLi = e.currentTarget;
+  const sideMenu = document.querySelector(".side-menu");
+  const allDropdowns = sideMenu.querySelectorAll(
+    ".default-content-wrapper > ul > li > ul"
+  );
+
+  allDropdowns.forEach((dropdown) => {
+    if (dropdown !== clickedLi.querySelector("ul")) {
+      dropdown.style.maxHeight = "0";
+      dropdown.style.opacity = "0";
+      // dropdown.previousElementSibling.textContent = "+";
+    }
+  });
+
+  const isExpanded = clickedLi.querySelector("ul");
+  if (clickedLi.querySelector("ul").style.display === "block") {
+    clickedLi.querySelector("ul").style.maxHeight = isExpanded ? "0" : "unset";
+    clickedLi.querySelector("ul").style.opacity = isExpanded ? "0" : "1";
+    clickedLi.querySelector("ul").style.display = isExpanded ? "none" : "block";
+    clickedLi.querySelector("span.toggle-sign").textContent = isExpanded
+      ? "+"
+      : "-";
+  } else {
+    clickedLi.querySelector("ul").style.maxHeight = isExpanded ? "unset" : "0";
+    clickedLi.querySelector("ul").style.opacity = isExpanded ? "1" : "0";
+    clickedLi.querySelector("ul").style.display = isExpanded ? "block" : "none";
+    clickedLi.querySelector("span.toggle-sign").textContent = isExpanded
+      ? "-"
+      : "+";
+  }
 }
 
 /**
@@ -563,4 +596,17 @@ export default async function decorate(block) {
   document
     .querySelector(".side-menu-close")
     .addEventListener("click", closeSideMenu);
+
+  // Add toggle signs and event listeners for side menu dropdowns
+  sideMenu
+    .querySelectorAll(".default-content-wrapper > ul > li")
+    .forEach((li) => {
+      if (li.querySelector("ul")) {
+        const toggleSign = document.createElement("span");
+        toggleSign.className = "toggle-sign";
+        toggleSign.textContent = "+";
+        li.prepend(toggleSign);
+        li.addEventListener("click", toggleSideMenuDropdown);
+      }
+    });
 }
