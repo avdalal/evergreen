@@ -44,3 +44,8 @@
   display: flex;
   align-items: center;
 }
+
+.products__product-image img {
+  width: 350px;
+  height: 375px;
+}
