@@ -199,34 +199,6 @@ function filterData(searchTerms, data) {
   ].map((item) => item.result);
 }
 
-async function handleSearch(e, block, config) {
-  const searchValue = e.target.value;
-  searchParams.set("q", searchValue);
-  if (window.history.replaceState) {
-    const url = new URL(window.location.href);
-    url.pathname = "/products";
-    url.search = searchParams.toString();
-    window.history.replaceState({}, "", url.toString());
-  }
-
-  if (searchValue.length < 3) {
-    clearSearch(block);
-    return;
-  }
-  const searchTerms = searchValue
-    .toLowerCase()
-    .split(/\s+/)
-    .filter((term) => !!term);
-
-  const data = await fetchData(config.source);
-  if (!data) {
-    console.error("No data fetched");
-    return;
-  }
-  const filteredData = filterData(searchTerms, data);
-  await renderResults(block, config, filteredData, searchTerms);
-}
-
 function searchResultsContainer(block) {
   const results = document.createElement("ul");
   results.className = "search-results";
@@ -243,32 +215,24 @@ function searchInput(block, config) {
   input.placeholder = searchPlaceholder;
   input.setAttribute("aria-label", searchPlaceholder);
 
-  input.addEventListener("input", (e) => {
-    handleSearch(e, block, config);
-  });
-
-  input.addEventListener("keyup", (e) => {
-    if (e.code === "Escape") {
-      // e.style.display = "none";
-      clearSearch(block);
-    }
-  });
-
   return input;
 }
 
-function searchIcon() {
-  const icon = document.createElement("span");
-  icon.classList.add("icon", "icon-search");
-  return icon;
-}
-
 function searchBox(block, config) {
+  const form = document.createElement("form");
+  form.classList.add("search-form");
+  form.setAttribute("action", "/products");
+  form.setAttribute("method", "GET");
+
+  const input = searchInput(block, config);
+  input.setAttribute("name", "q"); // Set the name attribute to "q" for the query parameter
+
   const box = document.createElement("div");
   box.classList.add("search-box");
-  box.append(searchIcon(), searchInput(block, config));
+  box.append(input);
 
-  return box;
+  form.append(box);
+  return form;
 }
 
 async function decorateSearch(block) {
