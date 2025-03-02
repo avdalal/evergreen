@@ -4,6 +4,9 @@
   margin-left: -8px;
   margin-right: -7px;
   list-style: none;
+  margin: auto;
+  padding: 0;
+  justify-content: center;
 }
 
 .products__product-item {
@@ -38,6 +41,5 @@
 }
 
 .products__product-image {
-  max-width: 320px;
   padding-bottom: .375rem;
 }

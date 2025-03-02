@@ -2,9 +2,24 @@
   width: 30%;
   padding-right: 30px;
 }
+
 .productinfo {
   display: flex;
+
+
 }
-.productinfo button{
+
+@media screen and (max-width: 900px) {
+  .productinfo {
+    font-size: 16px;
+  }
+
+  .productinfo h2 {
+    font-size: 20px;
+  }
+
+}
+
+.productinfo button {
   background-color: #ff7f00;
 }
