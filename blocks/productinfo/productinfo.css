@@ -4,6 +4,7 @@
   align-content: center;
 }
 
+
 @media (width < 900px) {
   .productinfo {
     display: flex;
@@ -21,7 +22,22 @@
 
 .productinfo {
   display: flex;
+
+
 }
+
+
+@media screen and (max-width: 900px) {
+  .productinfo {
+    font-size: 16px;
+  }
+
+  .productinfo h2 {
+    font-size: 20px;
+  }
+
+}
+
 
 .productinfo button {
   background-color: #ff7f00;

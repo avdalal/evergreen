@@ -4,6 +4,9 @@
   margin-left: -8px;
   margin-right: -7px;
   list-style: none;
+  margin: auto;
+  padding: 0;
+  justify-content: center;
 }
 
 .products__product-item {
@@ -37,15 +40,10 @@
   color: #333333;
 }
 
-.products__product-image {
-  max-width: 320px;
-  height: 375px;
-  padding-bottom: .375rem;
-  display: flex;
-  align-items: center;
-}
-
 .products__product-image img {
   width: 350px;
   height: 375px;
+    padding-bottom: .375rem;
+  display: flex;
+  align-items: center;
 }
