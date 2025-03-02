@@ -14,17 +14,15 @@ export default async function decorate(block) {
   // Function to check if the cart is empty and display a message
   function checkEmptyCart() {
    const cartToCheck = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log("cart.length", cartToCheck.length);
     
     if (cartToCheck.length < 1) {
       emptyMessage.style.display = 'block';
       emptyMessage.style.cursor = 'not-allowed';
       emptyMessage.style.opacity = '0.65';
       block.querySelector("ul")?.remove();
-      return true;
+    } else {
+      emptyMessage.style.display = 'none';
     }
-    emptyMessage.style.display = 'none';
-    return false;
   }
 
   // Check if the cart is empty at the beginning
@@ -35,7 +33,7 @@ export default async function decorate(block) {
     const data = await response.json();
 
     const cartProducts = [];
-    data.data.forEach((product) => {
+    data?.data.forEach((product) => {
       const cartItem = cart.find((item) => item.productID === product.ProductID);
       if (cartItem) {
         cartProducts.push({ ...product, quantity: cartItem.amount });
@@ -47,7 +45,7 @@ export default async function decorate(block) {
     let totalItems = 0;
     const shippingFee = 5.00; // Example shipping fee
 
-    cartProducts.forEach((product) => {
+    cartProducts?.forEach((product) => {
       const li = document.createElement("li");
 
       const img = createOptimizedPicture(
@@ -116,9 +114,9 @@ export default async function decorate(block) {
     summaryDiv.innerHTML = `
       <h4>Summary</h4>
       <p>Total Items: <span id="total-items">${totalItems}</span></p>
-      <p>Total Price: <span id="total-price">${Math.round(totalPrice)}</span></p>
+      <p>Total Price: <span id="total-price">$${Math.round(totalPrice)}</span></p>
       <p>Shipping Fee: <span id="shipping-fee">$${totalItems > 0 ? Math.round(shippingFee) : '0'}</span></p>
-      <p>Total Price (including shipping): <span id="total-price-with-shipping">${totalItems > 0 ? Math.round(totalPrice + shippingFee) : '0'}</span></p>
+      <p>Total Price (including shipping): <span id="total-price-with-shipping">$${totalItems > 0 ? Math.round(totalPrice + shippingFee) : '0'}</span></p>
       <button class="cta-button">Complete Payment</button>
     `;
     block.append(summaryDiv);
@@ -146,8 +144,9 @@ export default async function decorate(block) {
         }
       });
 
-      document.getElementById('total-price').textContent = `$${Math.round(newTotalPrice)}`;
+      document.getElementById('total-price').textContent =`$${Math.round(newTotalPrice)}`;
       document.getElementById('total-items').textContent = newTotalItems;
+      document.getElementById('shipping-fee').textContent = (newTotalItems === 0 ? '$0' : `$${Math.round(newTotalPrice + shippingFee)}`);
       document.getElementById('total-price-with-shipping').textContent = (newTotalItems === 0 ? '$0' : `$${Math.round(newTotalPrice + shippingFee)}`);
 
       // Update the state of the "Complete Payment" button and empty message
@@ -187,11 +186,9 @@ export default async function decorate(block) {
     completePaymentButton.addEventListener('click', () => {
       localStorage.setItem('cart', JSON.stringify([]));
       alert('Payment completed and cart updated in local storage.');
+      updateTotalPrice();
       checkEmptyCart();
     });
-
-    // Initial call to update the total price and items
-    updateTotalPrice();
 
   } catch (error) {
     console.error("Failed to fetch products data:", error);
