@@ -5,8 +5,10 @@
   margin-right: -7px;
   list-style: none;
   margin: auto;
-  padding: 0;
+  padding: 20px 0;
   justify-content: center;
+  justify-content: space-between;
+  gap: 15px;
 }
 
 .products__product-item {
