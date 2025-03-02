@@ -1,15 +1,15 @@
-.cards-wrapper{
+.cards-wrapper {
   display: flex;
   justify-content: center;
 }
 
-.cards{
+.cards {
   display: flex;
   width: 90%;
   justify-content: center;
 }
 
-.cards > ul {
+.cards>ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -17,7 +17,7 @@
   gap: 15px;
 }
 
-.cards > ul > li {
+.cards>ul>li {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
   width: 205px;
   height: 267px;
@@ -28,7 +28,7 @@
   text-align: center;
 }
 
-.cards .cards-card-body p strong{
+.cards .cards-card-body p strong {
   background-color: white;
   z-index: 999;
   position: relative;
@@ -36,47 +36,48 @@
   padding-top: 6px;
 }
 
-.cards .cards-card-image {  
+.cards .cards-card-image {
   line-height: 0;
   margin: 16px;
 }
 
-.cards > ul > li img {
+.cards>ul>li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
-.cards > ul > li img:hover {
+
+.cards>ul>li img:hover {
   transform: scale(1.24);
   transition-duration: 0.3s;
   transition-property: transform;
 }
 
 @media (max-width: 900px) {
-  .cards > ul {
+  .cards>ul {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .cards > ul > li {
+  .cards>ul>li {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    width: 100px;
-    height: 167px;
+
   }
 
-  .cards .cards-card-body p{
+  .cards .cards-card-body p {
     margin: 0;
     line-height: normal;
   }
-  .cards .cards-card-body p strong{
+
+  .cards .cards-card-body p strong {
     font-size: 12px;
   }
 
-  .cards .cards-card-image { 
+  .cards .cards-card-image {
     margin: 4px;
   }
 
-  .cards > ul > li img:hover {
+  .cards>ul>li img:hover {
     transform: none;
   }
 }
