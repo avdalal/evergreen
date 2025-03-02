@@ -5,17 +5,34 @@ export default async function decorate(block) {
     const response = await fetch("/products.json");
     const data = await response.json();
 
-    // Extract category from the URL
+    // Extract category, subcategory, and query parameter from the URL
     const url = new URL(window.location.href);
     const category = url.pathname.split("/").pop();
+    const subcategory = url.searchParams.get("subcategory");
+    const q = url.searchParams.get("q");
+    console.log("category:", category);
+    console.log("subcategory:", subcategory);
+    console.log("q:", q);
 
     const ul = document.createElement("ul");
     ul.className = "products__list";
 
-    // Filter products by category
-    const filteredProducts = data.data.filter(
-      (product) => product.Category.toLowerCase() === category.toLowerCase()
-    );
+    // Filter products by category, subcategory, and query parameter
+    const filteredProducts = data.data.filter((product) => {
+      const isCategoryMatch =
+        category && category.toLowerCase() !== "products"
+          ? product.Category.toLowerCase() === category.toLowerCase()
+          : true;
+      const isSubcategoryMatch = subcategory
+        ? product.SubCategory &&
+          product.SubCategory.toLowerCase() === subcategory.toLowerCase()
+        : true;
+      const isQueryMatch = q
+        ? product.ProductName.toLowerCase().includes(q.toLowerCase()) ||
+          product.Description.toLowerCase().includes(q.toLowerCase())
+        : true;
+      return isCategoryMatch && isSubcategoryMatch && isQueryMatch;
+    });
 
     filteredProducts.forEach((product) => {
       const li = document.createElement("li");

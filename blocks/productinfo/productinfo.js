@@ -55,6 +55,7 @@ export default async function decorate(block) {
         }
 
         localStorage.setItem('cart', JSON.stringify(cart));
+        window.location.href = '/cart';
       });
 
       bodyDiv.append(quantityDiv);

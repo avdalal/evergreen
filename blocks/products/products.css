@@ -40,6 +40,10 @@
   color: #333333;
 }
 
-.products__product-image {
-  padding-bottom: .375rem;
+.products__product-image img {
+  width: 350px;
+  height: 375px;
+    padding-bottom: .375rem;
+  display: flex;
+  align-items: center;
 }

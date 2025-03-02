@@ -1,6 +1,23 @@
 .productinfo .image {
-  width: 30%;
+  /* width: 30%; */
   padding-right: 30px;
+  align-content: center;
+}
+
+
+@media (width < 900px) {
+  .productinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+  }
+}
+.productinfo h2{
+  font-size: 1.25rem;
+}
+.productinfo{
+  font-size: 16px ;
 }
 
 .productinfo {
@@ -8,6 +25,7 @@
 
 
 }
+
 
 @media screen and (max-width: 900px) {
   .productinfo {
@@ -19,6 +37,7 @@
   }
 
 }
+
 
 .productinfo button {
   background-color: #ff7f00;
