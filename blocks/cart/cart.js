@@ -7,14 +7,20 @@ export default async function decorate(block) {
   const emptyMessage = document.createElement('p');
   emptyMessage.className = 'empty-message';
   emptyMessage.textContent = 'The cart is empty.';
+  emptyMessage.style.width = '100%';
+
   block.append(emptyMessage);
 
   // Function to check if the cart is empty and display a message
   function checkEmptyCart() {
-    if (cart.length === 0) {
+   const cartToCheck = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log("cart.length", cartToCheck.length);
+    
+    if (cartToCheck.length < 1) {
       emptyMessage.style.display = 'block';
       emptyMessage.style.cursor = 'not-allowed';
       emptyMessage.style.opacity = '0.65';
+      block.querySelector("ul")?.remove();
       return true;
     }
     emptyMessage.style.display = 'none';
@@ -108,7 +114,7 @@ export default async function decorate(block) {
     const summaryDiv = document.createElement("div");
     summaryDiv.className = "summary-card";
     summaryDiv.innerHTML = `
-      <h3>Summary</h3>
+      <h4>Summary</h4>
       <p>Total Items: <span id="total-items">${totalItems}</span></p>
       <p>Total Price: <span id="total-price">${Math.round(totalPrice)}</span></p>
       <p>Shipping Fee: <span id="shipping-fee">$${totalItems > 0 ? Math.round(shippingFee) : '0'}</span></p>
@@ -179,7 +185,7 @@ export default async function decorate(block) {
     // Add event listener to the "Complete Payment" button
     const completePaymentButton = summaryDiv.querySelector('.cta-button');
     completePaymentButton.addEventListener('click', () => {
-      updateLocalStorage();
+      localStorage.setItem('cart', JSON.stringify([]));
       alert('Payment completed and cart updated in local storage.');
       checkEmptyCart();
     });
