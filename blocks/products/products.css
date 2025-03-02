@@ -21,7 +21,7 @@
 .products__product-body {
   display: grid;
   justify-items: center;
-  max-width: 350x;
+  max-width: 350px;
 }
 
 .products___product-title {
