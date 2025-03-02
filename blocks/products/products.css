@@ -21,6 +21,7 @@
 .products__product-body {
   display: grid;
   justify-items: center;
+  max-width: 350x;
 }
 
 .products___product-title {
@@ -43,7 +44,7 @@
 .products__product-image img {
   width: 350px;
   height: 375px;
-    padding-bottom: .375rem;
+  padding-bottom: .375rem;
   display: flex;
   align-items: center;
 }
