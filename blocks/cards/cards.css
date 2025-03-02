@@ -31,6 +31,11 @@
   text-align: center;
 }
 
+.cards .cards-card-body * {
+  text-decoration: none;
+  color: #000;
+}
+
 .cards .cards-card-body p strong {
   background-color: white;
   z-index: 999;
